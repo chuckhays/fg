@@ -12,7 +12,7 @@
 #import "SignUpView.h"
 #import "WaitingView.h"
 
-@interface SignUpViewController () <SignUpViewDelegate>
+@interface SignUpViewController () <SignUpViewDelegate, ConfirmationViewDelegate>
 
 @property(nonatomic, readonly) SignUpView *signUpView;
 @property(nonatomic, readonly) WaitingView *waitingView;
@@ -64,16 +64,45 @@
                          self.signUpView.hidden = YES;
                      }];
     // Simulate async API call.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self transitionToConfirmation];
     });
 }
 
+#pragma mark - ConfirmationViewDelegate
+
+- (void)viewDidTapSubmit:(ConfirmationView *)view {
+    // Execute sign in flow.
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Sign In", nil)
+                                                                   message:NSLocalizedString(@"Not yet implemented", nil)
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - Private
 
 - (void)transitionToConfirmation {
-    
+    if (!_confirmationView) {
+        _confirmationView = [[ConfirmationView alloc] initWithFirstName:_signUpView.firstName
+                                                                  email:_signUpView.email
+                                                               delegate:self];
+        _confirmationView.autoresizingMask =
+            UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _confirmationView.frame = self.view.bounds;
+        _confirmationView.alpha = 0;
+        [self.view addSubview:_confirmationView];
+    }
+    [UIView animateWithDuration:.75
+                     animations:^{
+                         self.waitingView.alpha = 0;
+                         self.confirmationView.alpha = 1;
+                     }];
 }
 
 @end

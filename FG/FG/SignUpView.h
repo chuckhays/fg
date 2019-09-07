@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Determines whether the submit button is enabled.
 @property(nonatomic) BOOL isSubmitEnabled;
 
-- (instancetype)initWithDelegate:(id<SignUpViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<SignUpViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 @end
 

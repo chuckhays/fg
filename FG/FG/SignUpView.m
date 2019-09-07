@@ -126,6 +126,8 @@
     _submitButton.enabled = isSubmitEnabled;
 }
 
+#pragma mark - Private
+
 - (void)textFieldDidChange:(UITextField *)textField {
     [_delegate viewDidChangeData:self];
 }

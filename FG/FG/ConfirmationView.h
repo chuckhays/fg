@@ -10,7 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ConfirmationView;
+
+@protocol ConfirmationViewDelegate
+
+- (void)viewDidTapSubmit:(ConfirmationView *)view;
+
+@end
+
 @interface ConfirmationView : UIView
+
+@property(nonatomic, weak) id<ConfirmationViewDelegate> delegate;
+
+- (instancetype)initWithFirstName:(NSString *)firstName
+                            email:(NSString *)email
+                         delegate:(id<ConfirmationViewDelegate>)delegate
+    NS_DESIGNATED_INITIALIZER;
 
 @end
 
