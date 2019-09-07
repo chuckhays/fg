@@ -14,6 +14,9 @@
 		13F5103123233DD70011AC15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13F5102F23233DD70011AC15 /* LaunchScreen.storyboard */; };
 		13F5103423233DD70011AC15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F5103323233DD70011AC15 /* main.m */; };
 		13F5103E23233DD70011AC15 /* FGTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F5103D23233DD70011AC15 /* FGTests.m */; };
+		13F5104C23233FF90011AC15 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F5104B23233FF90011AC15 /* SignUpView.m */; };
+		13F5104F2323400E0011AC15 /* ConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F5104E2323400E0011AC15 /* ConfirmationView.m */; };
+		13F51052232340350011AC15 /* WaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13F51051232340350011AC15 /* WaitingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		13F5103923233DD70011AC15 /* FGTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FGTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F5103D23233DD70011AC15 /* FGTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGTests.m; sourceTree = "<group>"; };
 		13F5103F23233DD70011AC15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13F5104A23233FF90011AC15 /* SignUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpView.h; sourceTree = "<group>"; };
+		13F5104B23233FF90011AC15 /* SignUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpView.m; sourceTree = "<group>"; };
+		13F5104D2323400E0011AC15 /* ConfirmationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmationView.h; sourceTree = "<group>"; };
+		13F5104E2323400E0011AC15 /* ConfirmationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmationView.m; sourceTree = "<group>"; };
+		13F51050232340350011AC15 /* WaitingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaitingView.h; sourceTree = "<group>"; };
+		13F51051232340350011AC15 /* WaitingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaitingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +99,12 @@
 				13F5102F23233DD70011AC15 /* LaunchScreen.storyboard */,
 				13F5103223233DD70011AC15 /* Info.plist */,
 				13F5103323233DD70011AC15 /* main.m */,
+				13F5104A23233FF90011AC15 /* SignUpView.h */,
+				13F5104B23233FF90011AC15 /* SignUpView.m */,
+				13F5104D2323400E0011AC15 /* ConfirmationView.h */,
+				13F5104E2323400E0011AC15 /* ConfirmationView.m */,
+				13F51050232340350011AC15 /* WaitingView.h */,
+				13F51051232340350011AC15 /* WaitingView.m */,
 			);
 			path = FG;
 			sourceTree = "<group>";
@@ -203,8 +218,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13F5104C23233FF90011AC15 /* SignUpView.m in Sources */,
 				13F5102923233DD50011AC15 /* SignUpViewController.m in Sources */,
+				13F5104F2323400E0011AC15 /* ConfirmationView.m in Sources */,
 				13F5103423233DD70011AC15 /* main.m in Sources */,
+				13F51052232340350011AC15 /* WaitingView.m in Sources */,
 				13F5102623233DD50011AC15 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
