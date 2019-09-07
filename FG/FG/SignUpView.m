@@ -64,7 +64,7 @@
         _submitButton.backgroundColor = [UIColor colorWithRed:177/255.0 green:57/255.0 blue:112/255.0 alpha:1.0];
         _submitButton.layer.cornerRadius = 5;
         _submitButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        _submitButton.enabled = NO;
+        self.isSubmitEnabled = NO;
         [_submitButton addTarget:self
                           action:@selector(didTapButton:)
                 forControlEvents:UIControlEventTouchUpInside];
@@ -124,6 +124,7 @@
 
 - (void)setIsSubmitEnabled:(BOOL)isSubmitEnabled {
     _submitButton.enabled = isSubmitEnabled;
+    _submitButton.alpha = isSubmitEnabled ? 1 : 0.5;
 }
 
 #pragma mark - Private
