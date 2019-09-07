@@ -40,14 +40,23 @@
         _firstNameField = [[UITextField alloc] initWithFrame:CGRectZero];
         _firstNameField.placeholder = NSLocalizedString(@"First Name", nil);
         _firstNameField.translatesAutoresizingMaskIntoConstraints = NO;
+        [_firstNameField addTarget:self
+                            action:@selector(textFieldDidChange:)
+                  forControlEvents:UIControlEventEditingChanged];
         _emailField = [[UITextField alloc] initWithFrame:CGRectZero];
         _emailField.placeholder = NSLocalizedString(@"Email Address", nil);
         _emailField.keyboardType = UIKeyboardTypeEmailAddress;
         _emailField.translatesAutoresizingMaskIntoConstraints = NO;
+        [_emailField addTarget:self
+                        action:@selector(textFieldDidChange:)
+              forControlEvents:UIControlEventEditingChanged];
         _passwordField = [[UITextField alloc] initWithFrame:CGRectZero];
         _passwordField.placeholder = NSLocalizedString(@"Password", nil);
         _passwordField.secureTextEntry = YES;
         _passwordField.translatesAutoresizingMaskIntoConstraints = NO;
+        [_passwordField addTarget:self
+                           action:@selector(textFieldDidChange:)
+                 forControlEvents:UIControlEventEditingChanged];
         
         _submitButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [_submitButton setTitle:NSLocalizedString(@"Sign Up", nil) forState:UIControlStateNormal];
@@ -55,6 +64,10 @@
         _submitButton.backgroundColor = [UIColor colorWithRed:177/255.0 green:57/255.0 blue:112/255.0 alpha:1.0];
         _submitButton.layer.cornerRadius = 5;
         _submitButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        _submitButton.enabled = NO;
+        [_submitButton addTarget:self
+                          action:@selector(didTapButton:)
+                forControlEvents:UIControlEventTouchUpInside];
 
         [self addSubview:_heading1];
         [self addSubview:_heading2];
@@ -70,16 +83,16 @@
         [NSLayoutConstraint activateConstraints:@[
                                                   [_heading1.leadingAnchor constraintEqualToAnchor:_firstNameField.leadingAnchor],
                                                   [_heading1.widthAnchor constraintEqualToConstant:columnWidth],
+                                                  [_heading1.topAnchor constraintEqualToAnchor:self.topAnchor constant:margin * 2],
                                                   [_heading2.leadingAnchor constraintEqualToAnchor:_firstNameField.leadingAnchor],
                                                   [_heading2.widthAnchor constraintEqualToConstant:columnWidth],
-                                                  [_heading2.topAnchor constraintEqualToAnchor:_heading1.bottomAnchor constant:margin],
+                                                  [_heading2.topAnchor constraintEqualToAnchor:_heading1.bottomAnchor],
                                                   [_helpText.leadingAnchor constraintEqualToAnchor:_firstNameField.leadingAnchor],
                                                   [_helpText.widthAnchor constraintEqualToConstant:columnWidth],
-                                                  [_helpText.topAnchor constraintEqualToAnchor:_heading2.bottomAnchor constant:margin],
+                                                  [_helpText.topAnchor constraintEqualToAnchor:_heading2.bottomAnchor constant:margin/2],
                                                   [_firstNameField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
                                                   [_firstNameField.widthAnchor constraintEqualToConstant:columnWidth],
                                                   [_firstNameField.topAnchor constraintEqualToAnchor:_helpText.bottomAnchor constant:margin],
-                                                  [_firstNameField.centerYAnchor constraintEqualToAnchor:self.centerYAnchor],
                                                   [_emailField.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
                                                   [_emailField.widthAnchor constraintEqualToConstant:columnWidth],
                                                   [_emailField.topAnchor constraintEqualToAnchor:_firstNameField.bottomAnchor constant:margin],
@@ -92,5 +105,34 @@
     }
     return self;
 }
+
+- (NSString *)firstName {
+    return _firstNameField.text;
+}
+
+- (NSString *)email {
+    return _emailField.text;
+}
+
+- (NSString *)password {
+    return _passwordField.text;
+}
+
+- (BOOL)isSubmitEnabled {
+    return _submitButton.enabled;
+}
+
+- (void)setIsSubmitEnabled:(BOOL)isSubmitEnabled {
+    _submitButton.enabled = isSubmitEnabled;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    [_delegate viewDidChangeData:self];
+}
+
+- (void)didTapButton:(UIButton *)button {
+    [_delegate viewDidChangeData:self];
+}
+
 
 @end

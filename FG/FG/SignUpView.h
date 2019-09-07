@@ -26,12 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) NSString *email;
 @property(nonatomic, readonly) NSString *password;
 
-// Setting these properties to YES shows an error state
-// on the appropriate field.
-@property(nonatomic) BOOL isFirstNameError;
-@property(nonatomic) BOOL isEmailError;
-@property(nonatomic) BOOL isPasswordError;
-
 // Determines whether the submit button is enabled.
 @property(nonatomic) BOOL isSubmitEnabled;
 

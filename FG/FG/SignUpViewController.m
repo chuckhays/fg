@@ -30,7 +30,12 @@
 #pragma mark - SignUpViewDelegate
 
 - (void)viewDidChangeData:(SignUpView *)view {
-    
+    // Require each field to have a value.
+    BOOL shouldEnable =
+        _signUpView.firstName.length > 0 &&
+        _signUpView.email.length > 0 &&
+        _signUpView.password.length > 0;
+    _signUpView.isSubmitEnabled = shouldEnable;
 }
 
 - (void)viewDidTapSignUp:(SignUpView *)view {
