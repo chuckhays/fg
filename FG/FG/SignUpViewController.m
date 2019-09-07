@@ -6,13 +6,13 @@
 //  Copyright © 2019 Chuck Hays. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SignUpViewController.h"
 
-@interface ViewController ()
+@interface SignUpViewController ()
 
 @end
 
-@implementation ViewController
+@implementation SignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
