@@ -74,6 +74,10 @@ class SignUpForm extends React.Component {
 }
 
 class Confirmation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   render() {
     return (
       <div>
@@ -81,11 +85,14 @@ class Confirmation extends React.Component {
       <h1>{this.props.data.firstName}!</h1>
       <p>You have been registered for this awesome service. Please check your email listed below for instructions.</p>
       <h3>{this.props.data.email}</h3>
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <button>Sign In</button>
       </form>
       </div>
     )
+  }
+  handleSubmit(e) {
+    alert("Not yet implemented.");
   }
 }
 
