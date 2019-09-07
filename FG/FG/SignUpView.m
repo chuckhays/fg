@@ -131,7 +131,7 @@
 }
 
 - (void)didTapButton:(UIButton *)button {
-    [_delegate viewDidChangeData:self];
+    [_delegate viewDidTapSignUp:self];
 }
 
 

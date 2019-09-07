@@ -8,14 +8,33 @@
 
 #import "WaitingView.h"
 
-@implementation WaitingView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+@implementation WaitingView {
+    UIActivityIndicatorView *_activityIndicator;
 }
-*/
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_activityIndicator];
+        [self stop];
+        [NSLayoutConstraint activateConstraints:@[
+                                                  [_activityIndicator.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+                                                  [_activityIndicator.centerYAnchor constraintEqualToAnchor:self.centerYAnchor],
+                                                  [_activityIndicator.widthAnchor constraintEqualToAnchor:self.widthAnchor],
+                                                  [_activityIndicator.heightAnchor constraintEqualToAnchor:self.heightAnchor],
+                                                  ]];
+    }
+    return self;
+}
+
+- (void)start {
+    [_activityIndicator startAnimating];
+}
+
+- (void)stop {
+    [_activityIndicator stopAnimating];
+}
 
 @end
