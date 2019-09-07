@@ -8,15 +8,33 @@
 
 #import "SignUpViewController.h"
 
-@interface SignUpViewController ()
+#import "SignUpView.h"
+
+@interface SignUpViewController () <SignUpViewDelegate>
 
 @end
 
-@implementation SignUpViewController
+@implementation SignUpViewController {
+    SignUpView *_signUpView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _signUpView = [[SignUpView alloc] initWithDelegate:self];
+    _signUpView.frame = self.view.bounds;
+    _signUpView.autoresizingMask =
+        UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_signUpView];
+}
+
+#pragma mark - SignUpViewDelegate
+
+- (void)viewDidChangeData:(SignUpView *)view {
+    
+}
+
+- (void)viewDidTapSignUp:(SignUpView *)view {
+    
 }
 
 
