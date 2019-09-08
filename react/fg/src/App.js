@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -46,14 +45,22 @@ class SignUpForm extends React.Component {
   render() {
     return (
       <div>
-      <h2>Let's</h2>
-      <h1>Sign Up</h1>
-      <p>Use the form below to sign up for this super awesome service. You're onl a few steps away!</p>
-      <form onSubmit={this.handleSubmit}>
+      <p className="heading1">Let's</p>
+      <p className="heading2">Sign Up</p>
+      <p className="help">Use the form below to sign up for this super awesome service. You're only a few steps away!</p>
+      <form className="appForm" onSubmit={this.handleSubmit}>
+        <div>
         <input type="text" id="firstName" name="firstName" required placeholder="First Name" onChange={this.handleInputChange}></input>
+        </div>
+        <div>
         <input type="email" id="email" name="email" required placeholder="Email" onChange={this.handleInputChange}></input>
+        </div>
+        <div>
         <input type="password" id="password" name="password" required placeholder="Password" onChange={this.handleInputChange}></input>
+        </div>
+        <div>
         <button>Sign Up</button>
+        </div>
       </form>
       </div>
     )
@@ -81,11 +88,11 @@ class Confirmation extends React.Component {
   render() {
     return (
       <div>
-      <h2>Welcome,</h2>
-      <h1>{this.props.data.firstName}!</h1>
-      <p>You have been registered for this awesome service. Please check your email listed below for instructions.</p>
-      <h3>{this.props.data.email}</h3>
-      <form onSubmit={this.handleSubmit}>
+      <p className="heading1">Welcome,</p>
+      <p className="heading2">{this.props.data.firstName}!</p>
+      <p class="help">You have been registered for this awesome service. Please check your email listed below for instructions.</p>
+      <p className="heading3">{this.props.data.email}</p>
+      <form className="appForm" onSubmit={this.handleSubmit}>
         <button>Sign In</button>
       </form>
       </div>
