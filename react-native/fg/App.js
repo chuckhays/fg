@@ -14,14 +14,12 @@ import {
   View,
   Text,
   StatusBar,
+  TextInput,
+  Button,
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 const App = () => {
@@ -32,40 +30,7 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
+          <MainApp />
         </ScrollView>
       </SafeAreaView>
     </Fragment>
@@ -110,5 +75,95 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
+class MainApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.state = { registered: false, waiting: false };
+  }
+  render() {
+    if (this.state.waiting) {
+      return (
+        <View>
+          <Text>Waiting for API</Text>
+        </View>
+      )
+    } else if (this.state.registered) {
+      return (
+        <View>
+          <Confirmation data={this.state.data}/>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <SignUpForm onSubmit={(data) => this.handleSubmit(data)}/>
+          </View>
+      )
+    }
+  }
+  handleSubmit(data) {
+    // This is where registration could happen with a real API.
+    // Simulate a delay calling the async API.
+    setTimeout(() => {this.setState({registered: true, waiting: false});}, 3000);
+    this.setState({waiting: true, "data": data});
+  }
+}
+
+class SignUpForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {firstName: "", email: "", password: ""};
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
+  }
+  render() {
+    let enabled = "firstName" in this.state && this.state.firstName.length > 0 &&
+    "email" in this.state && this.state.email.length > 0 &&
+    "password" in this.state && this.state.password.length > 0;
+    let disabledValue = enabled ? "" : "diabled";
+    return (
+      <View>
+        <Text>Let's</Text>
+        <Text>Sign Up</Text>
+        <Text>Use the form below to sign up for this super awesome service. You're only a few steps away!</Text>
+        <TextInput placeholder="First Name" required={true} onChangeText={text => this.onChangeText("firstName", text)}/>
+        <TextInput placeholder="Email" required={true} onChangeText={text => this.onChangeText("email", text)}/>
+        <TextInput placeholder="Password" secureTextEntry={true} required={true} onChangeText={text => this.onChangeText("password", text)}/>
+        <Button title="Sign Up" disabled={!enabled} onPress={() => this.handleSubmit()}/>
+      </View>
+    )
+  }
+  handleSubmit() {
+    this.props.onSubmit(this.state);
+  }
+  onChangeText(name, text) {
+    this.setState({
+      [name]: text
+    });
+  }
+}
+
+class Confirmation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  render() {
+    return (
+      <View>
+        <Text>Welcome,</Text>
+        <Text>{this.props.data.firstName}!</Text>
+        <Text>You have been registered for this awesome service. Please check your email listed below for instructions.</Text>
+        <Text>{this.props.data.email}</Text>
+        <Button title="Sign In" />
+      </View>
+    )
+  }
+  handleSubmit(e) {
+    alert("Not yet implemented.");
+  }
+}
 
 export default App;
