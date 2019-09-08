@@ -16,6 +16,7 @@ import {
   StatusBar,
   TextInput,
   Button,
+  Alert,
 } from 'react-native';
 
 import {
@@ -39,40 +40,32 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
+    margin: 20,
+    backgroundColor: Colors.white,
   },
   body: {
     backgroundColor: Colors.white,
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  heading1Text: {
+    fontSize: 20,
   },
-  sectionTitle: {
+  heading2Text: {
     fontSize: 24,
     fontWeight: '600',
-    color: Colors.black,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  helpText: {
     color: Colors.dark,
   },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
+  emailText: {
     fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  },
+  input: {
+    marginVertical: 10,
+    marginHorizontal: 0,
+    borderWidth: 1,
+    padding: 5,
+  },
+  submit: {
   },
 });
 
@@ -125,13 +118,13 @@ class SignUpForm extends React.Component {
     let disabledValue = enabled ? "" : "diabled";
     return (
       <View>
-        <Text>Let's</Text>
-        <Text>Sign Up</Text>
-        <Text>Use the form below to sign up for this super awesome service. You're only a few steps away!</Text>
-        <TextInput placeholder="First Name" required={true} onChangeText={text => this.onChangeText("firstName", text)}/>
-        <TextInput placeholder="Email" required={true} onChangeText={text => this.onChangeText("email", text)}/>
-        <TextInput placeholder="Password" secureTextEntry={true} required={true} onChangeText={text => this.onChangeText("password", text)}/>
-        <Button title="Sign Up" disabled={!enabled} onPress={() => this.handleSubmit()}/>
+        <Text style={styles.heading1Text}>Let's</Text>
+        <Text style={styles.heading2Text}>Sign Up</Text>
+        <Text style={styles.helpText}>Use the form below to sign up for this super awesome service. You're only a few steps away!</Text>
+        <TextInput style={styles.input} placeholder="First Name" required={true} onChangeText={text => this.onChangeText("firstName", text)}/>
+        <TextInput style={styles.input} placeholder="Email" required={true} onChangeText={text => this.onChangeText("email", text)}/>
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} required={true} onChangeText={text => this.onChangeText("password", text)}/>
+        <Button style={styles.submit} title="Sign Up" disabled={!enabled} onPress={() => this.handleSubmit()}/>
       </View>
     )
   }
@@ -153,16 +146,23 @@ class Confirmation extends React.Component {
   render() {
     return (
       <View>
-        <Text>Welcome,</Text>
-        <Text>{this.props.data.firstName}!</Text>
-        <Text>You have been registered for this awesome service. Please check your email listed below for instructions.</Text>
-        <Text>{this.props.data.email}</Text>
-        <Button title="Sign In" />
+        <Text style={styles.heading1Text}>Welcome,</Text>
+        <Text style={styles.heading2Text}>{this.props.data.firstName}!</Text>
+        <Text style={styles.helpText}>You have been registered for this awesome service. Please check your email listed below for instructions.</Text>
+        <Text style={styles.emailText}>{this.props.data.email}</Text>
+        <Button style={styles.submit} title="Sign In" onPress={() => this.handleSubmit()}/>
       </View>
     )
   }
   handleSubmit(e) {
-    alert("Not yet implemented.");
+    Alert.alert(
+      'Oops',
+      'Not yet implemented',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
   }
 }
 
