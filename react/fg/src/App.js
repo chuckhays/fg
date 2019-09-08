@@ -13,10 +13,16 @@ class MainApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state = { registered: false };
+    this.state = { registered: false, waiting: false };
   }
   render() {
-    if (this.state.registered) {
+    if (this.state.waiting) {
+      return (
+        <div>
+          <Spinner />
+        </div>
+      )
+    } else if (this.state.registered) {
       return (
         <div>
           <Confirmation data={this.state.data}/>
@@ -32,7 +38,9 @@ class MainApp extends React.Component {
   }
   handleSubmit(data) {
     // This is where registration could happen with a real API.
-    this.setState({registered: true, "data": data});
+    // Simulate a delay calling the async API.
+    setTimeout(() => {this.setState({registered: true, waiting: false});}, 3000);
+    this.setState({waiting: true, "data": data});
   }
 }
 
@@ -100,6 +108,17 @@ class Confirmation extends React.Component {
   }
   handleSubmit(e) {
     alert("Not yet implemented.");
+  }
+}
+
+class Spinner extends React.Component {
+  render() {
+    return (
+      <div className="spinner">
+        <div className="double-bounce1"></div>
+        <div className="double-bounce2"></div>
+      </div>
+    )
   }
 }
 
